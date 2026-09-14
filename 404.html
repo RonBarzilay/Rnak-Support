@@ -3,11 +3,57 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Rnak Support</title>
-  <meta http-equiv="refresh" content="0; url=pages/home/">
-  <link rel="canonical" href="pages/home/">
+  <script>
+    (function () {
+      var root = "/";
+      if (/\.github\.io$/i.test(location.hostname)) {
+        var first = location.pathname.split("/").filter(Boolean)[0];
+        if (first) root = "/" + first + "/";
+      }
+      document.write('<base href="' + location.origin + root + '">');
+    })();
+  </script>
+  <title>Page not found - Rnak</title>
+  <meta name="description" content="This Rnak Support page could not be found.">
+  <meta name="robots" content="noindex">
+  <link rel="icon" href="assets/images/icon.png">
+  <link rel="apple-touch-icon" href="assets/images/icon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Assistant:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/styles.css">
+  <script src="assets/js/lang-boot.js"></script>
+  <noscript><style>html body { visibility: visible !important; }</style></noscript>
 </head>
-<body>
-  <p><a href="pages/home/">Rnak Support</a></p>
+<body data-title-en="Page not found - Rnak" data-title-he="העמוד לא נמצא - Rnak">
+  <div class="wrap">
+    <header class="topbar">
+      <a class="brand" href="./">
+        <div class="brand-name">Rna<span>k</span></div>
+      </a>
+      <div class="lang" role="group" aria-label="Language">
+        <button type="button" data-lang="en" aria-pressed="true">EN</button>
+        <button type="button" data-lang="he" aria-pressed="false">עב</button>
+      </div>
+    </header>
+
+    <nav class="links">
+      <a href="./" data-en="Support" data-he="תמיכה">Support</a>
+      <a href="privacy-policy/" data-en="Privacy Policy" data-he="מדיניות פרטיות">Privacy Policy</a>
+      <a href="term-of-service/" data-en="Terms of Service" data-he="תנאי שימוש">Terms of Service</a>
+      <a href="account-deletion/" data-en="Delete Account" data-he="מחיקת חשבון">Delete Account</a>
+    </nav>
+
+    <main>
+      <h1 data-en="Page not found" data-he="העמוד לא נמצא">Page not found</h1>
+      <p class="lede" data-en="This page does not exist. Go back to Rnak Support to contact us or read the privacy policy and terms." data-he="העמוד הזה לא קיים. חזרו לתמיכת Rnak כדי ליצור קשר או לקרוא את מדיניות הפרטיות ותנאי השימוש.">This page does not exist. Go back to Rnak Support to contact us or read the privacy policy and terms.</p>
+      <p><a class="button" href="./" data-en="Back to support" data-he="חזרה לתמיכה">Back to support</a></p>
+    </main>
+
+    <footer class="footer" dir="ltr">
+      <p>© Rnak <span data-year>2026</span>. All rights reserved.</p>
+    </footer>
+  </div>
+  <script src="assets/js/site.js"></script>
 </body>
 </html>
