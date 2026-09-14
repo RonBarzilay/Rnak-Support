@@ -295,6 +295,20 @@ ol, ul {
   display: none !important;
 }
 
+html:not([data-i18n-ready]) body {
+  visibility: hidden;
+}
+
+html[lang="he"] .i18n[data-show="en"],
+html[lang="en"] .i18n[data-show="he"] {
+  display: none !important;
+}
+
+html[lang="he"] .i18n[data-show="he"],
+html[lang="en"] .i18n[data-show="en"] {
+  display: block !important;
+}
+
 @media (max-width: 640px) {
   .contact {
     align-items: flex-start;
