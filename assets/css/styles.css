@@ -163,12 +163,81 @@ h2 {
   font-size: 1.2rem;
 }
 
-.contact {
+.contact > p {
+  color: var(--muted);
+  margin: 0 0 1.15rem;
+}
+
+.contact-form {
+  display: grid;
+  gap: 0.95rem;
+}
+
+.contact-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.95rem;
+}
+
+.field {
   display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  justify-content: space-between;
-  gap: 1rem;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.field span {
+  font-size: 0.95rem;
+  font-weight: 600;
+}
+
+.field span::after {
+  content: " *";
+  color: var(--coral);
+}
+
+.contact-form input,
+.contact-form textarea {
+  appearance: none;
+  width: 100%;
+  margin: 0;
+  border: 1px solid var(--line);
+  background: #101010;
+  color: var(--text);
+  border-radius: 12px;
+  padding: 0.75rem 0.9rem;
+  font: inherit;
+}
+
+.contact-form textarea {
+  min-height: 8.5rem;
+  resize: vertical;
+}
+
+.contact-form input:focus,
+.contact-form textarea:focus {
+  outline: 2px solid var(--mint);
+  outline-offset: 1px;
+  border-color: transparent;
+}
+
+.contact-form input:user-invalid,
+.contact-form textarea:user-invalid {
+  border-color: var(--coral);
+}
+
+.contact-form .button {
+  justify-self: start;
+  margin-top: 0.15rem;
+}
+
+.contact-status {
+  margin: 0;
+  color: var(--mint);
+  font-weight: 600;
+}
+
+.contact-note {
+  margin: 1.15rem 0 0;
 }
 
 .contact a.button,
@@ -179,9 +248,12 @@ h2 {
   background: var(--text);
   color: var(--bg);
   text-decoration: none;
+  border: 0;
   border-radius: 999px;
   padding: 0.75rem 1.15rem;
+  font: inherit;
   font-weight: 700;
+  cursor: pointer;
 }
 
 .email {
@@ -339,8 +411,8 @@ html[lang="en"] .i18n[data-show="en"] {
 }
 
 @media (max-width: 640px) {
-  .contact {
-    align-items: flex-start;
+  .contact-row {
+    grid-template-columns: 1fr;
   }
 
   .brand-name {

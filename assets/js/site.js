@@ -87,4 +87,36 @@
       }
     });
   });
+
+  var form = document.querySelector(".contact-form");
+  if (form) {
+    form.addEventListener("submit", function (event) {
+      if (!form.checkValidity()) return;
+      event.preventDefault();
+
+      var name = form.elements.name.value.trim();
+      var email = form.elements.email.value.trim();
+      var phone = form.elements.phone.value.trim();
+      var message = form.elements.message.value.trim();
+      var lang = document.documentElement.lang === "he" ? "he" : "en";
+      var subject = lang === "he" ? "פנייה לתמיכת Rnak" : "Rnak support request";
+      var body = [
+        (lang === "he" ? "שם: " : "Name: ") + name,
+        (lang === "he" ? "אימייל: " : "Email: ") + email,
+        (lang === "he" ? "טלפון: " : "Phone: ") + phone,
+        "",
+        message
+      ].join("\n");
+
+      window.location.href = "mailto:rnakdesk@gmail.com?subject=" + encodeURIComponent(subject) + "&body=" + encodeURIComponent(body);
+
+      var status = form.querySelector(".contact-status");
+      if (status) {
+        status.hidden = false;
+        status.setAttribute("data-en", "Your email app will open. Send the message so we can reply.");
+        status.setAttribute("data-he", "ייפתח חלון המייל. שלחו את ההודעה כדי שנקבל את הפנייה.");
+        status.textContent = status.getAttribute("data-" + lang);
+      }
+    });
+  }
 })();

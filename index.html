@@ -45,12 +45,33 @@
       </div>
 
       <section class="card contact" aria-label="Contact">
-        <div>
-          <h2 data-en="Contact Rnak" data-he="יצירת קשר">Contact Rnak</h2>
-          <p data-en="Email is the fastest way to reach us." data-he="הדרך המהירה ביותר ליצור קשר היא במייל.">Email is the fastest way to reach us.</p>
-          <a class="email" href="mailto:rnakdesk@gmail.com">rnakdesk@gmail.com</a>
-        </div>
-        <a class="button" href="mailto:rnakdesk@gmail.com" data-en="Email support" data-he="שליחת מייל">Email support</a>
+        <h2 data-en="Contact Rnak" data-he="יצירת קשר">Contact Rnak</h2>
+        <p data-en="Fill in the form and we will get back to you. All fields are required." data-he="מלאו את הטופס ונחזור אליכם. כל השדות חובה.">Fill in the form and we will get back to you. All fields are required.</p>
+
+        <form class="contact-form" action="mailto:rnakdesk@gmail.com" method="post" enctype="text/plain">
+          <div class="contact-row">
+            <label class="field" for="contact-name">
+              <span data-en="Full name" data-he="שם מלא">Full name</span>
+              <input id="contact-name" name="name" type="text" autocomplete="name" required>
+            </label>
+            <label class="field" for="contact-email">
+              <span data-en="Email" data-he="אימייל">Email</span>
+              <input id="contact-email" name="email" type="email" autocomplete="email" inputmode="email" required>
+            </label>
+          </div>
+          <label class="field" for="contact-phone">
+            <span data-en="Phone" data-he="טלפון">Phone</span>
+            <input id="contact-phone" name="phone" type="tel" autocomplete="tel" inputmode="tel" required>
+          </label>
+          <label class="field" for="contact-message">
+            <span data-en="Message" data-he="הודעה">Message</span>
+            <textarea id="contact-message" name="message" rows="5" required></textarea>
+          </label>
+          <button type="submit" class="button" data-en="Send message" data-he="שליחת הודעה">Send message</button>
+          <p class="contact-status" role="status" aria-live="polite" hidden></p>
+        </form>
+
+        <p class="contact-note"><span data-en="You can also email" data-he="אפשר גם לשלוח מייל ל">You can also email</span> <a class="email" href="mailto:rnakdesk@gmail.com">rnakdesk@gmail.com</a>.</p>
       </section>
 
       <section class="faq">
@@ -59,7 +80,7 @@
           <button type="button" class="faq-q" aria-expanded="false" data-en="How do I get help?" data-he="איך מקבלים עזרה?">How do I get help?</button>
           <div class="faq-a">
             <div class="faq-a-inner">
-              <p data-en="Send a message to rnakdesk@gmail.com from the email on your Rnak account. Include your phone number and a short description of the issue." data-he="שלחו מייל ל-rnakdesk@gmail.com מהכתובת המחוברת לחשבון. ציינו מספר טלפון ותיאור קצר של הבעיה.">Send a message to rnakdesk@gmail.com from the email on your Rnak account. Include your phone number and a short description of the issue.</p>
+              <p data-en="Use the contact form on this page, or send a message to rnakdesk@gmail.com from the email on your Rnak account. Include your phone number and a short description of the issue." data-he="השתמשו בטופס יצירת הקשר בעמוד זה, או שלחו מייל ל-rnakdesk@gmail.com מהכתובת המחוברת לחשבון. ציינו מספר טלפון ותיאור קצר של הבעיה.">Use the contact form on this page, or send a message to rnakdesk@gmail.com from the email on your Rnak account. Include your phone number and a short description of the issue.</p>
             </div>
           </div>
         </div>
