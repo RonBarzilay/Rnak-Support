@@ -51,21 +51,21 @@
         <form class="contact-form" action="mailto:rnakdesk@gmail.com" method="post" enctype="text/plain">
           <div class="contact-row">
             <label class="field" for="contact-name">
+              <input id="contact-name" name="name" type="text" autocomplete="name" placeholder=" " required>
               <span data-en="Full name" data-he="שם מלא">Full name</span>
-              <input id="contact-name" name="name" type="text" autocomplete="name" required>
             </label>
             <label class="field" for="contact-email">
+              <input id="contact-email" name="email" type="email" autocomplete="email" inputmode="email" placeholder=" " required>
               <span data-en="Email" data-he="אימייל">Email</span>
-              <input id="contact-email" name="email" type="email" autocomplete="email" inputmode="email" required>
             </label>
           </div>
           <label class="field" for="contact-phone">
+            <input id="contact-phone" name="phone" type="tel" autocomplete="tel" inputmode="tel" placeholder=" " required>
             <span data-en="Phone" data-he="טלפון">Phone</span>
-            <input id="contact-phone" name="phone" type="tel" autocomplete="tel" inputmode="tel" required>
           </label>
           <label class="field" for="contact-message">
+            <textarea id="contact-message" name="message" rows="5" placeholder=" " required></textarea>
             <span data-en="Message" data-he="הודעה">Message</span>
-            <textarea id="contact-message" name="message" rows="5" required></textarea>
           </label>
           <button type="submit" class="button" data-en="Send message" data-he="שליחת הודעה">Send message</button>
           <p class="contact-status" role="status" aria-live="polite" hidden></p>
