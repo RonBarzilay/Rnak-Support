@@ -261,17 +261,46 @@ ol, ul {
   padding-inline-start: 1.2rem;
 }
 
-.legal-block h2 {
-  margin-top: 1.6rem;
+.legal-block[dir="rtl"] {
+  font-size: 1.05rem;
 }
 
-.legal-block h2:first-child {
-  margin-top: 0;
+.legal-block h2,
+.legal-block h3,
+.legal-block h4 {
+  color: var(--text);
+}
+
+.legal-block h2 {
+  margin-top: 1.6rem;
 }
 
 .legal-block h3 {
   margin: 1.2rem 0 0.4rem;
   font-size: 1.02rem;
+  font-weight: 600;
+}
+
+.legal-block h4 {
+  margin: 1rem 0 0.35rem;
+  font-size: 1rem;
+  font-weight: 600;
+}
+
+.legal-block h2:first-child,
+.legal-block h3:first-child,
+.legal-block h4:first-child {
+  margin-top: 0;
+}
+
+.legal-block p,
+.legal-block li {
+  overflow-wrap: anywhere;
+}
+
+.legal-block ul,
+.legal-block ol {
+  margin: 0.45rem 0 0.85rem;
 }
 
 .note {
