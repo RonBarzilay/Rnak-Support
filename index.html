@@ -11,7 +11,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Assistant:wght@400;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="assets/css/styles.css">
+  <link rel="stylesheet" href="assets/css/styles.css?v=20260926.3">
   <script src="assets/js/lang-boot.js"></script>
   <noscript><style>html body { visibility: visible !important; }</style></noscript>
 </head>
@@ -48,42 +48,53 @@
         <h2 data-en="Contact Rnak" data-he="יצירת קשר">Contact Rnak</h2>
         <p data-en="Fill in the form and we will get back to you. All fields are required." data-he="מלאו את הטופס ונחזור אליכם. כל השדות חובה.">Fill in the form and we will get back to you. All fields are required.</p>
 
-        <form class="contact-form" autocomplete="on" novalidate>
+        <form class="contact-form" action="https://formsubmit.co/rnakdesk@gmail.com" method="post" data-endpoint="https://formsubmit.co/ajax/rnakdesk@gmail.com" autocomplete="on">
+          <input type="hidden" name="_subject" value="Rnak support request">
+          <input type="hidden" name="_template" value="table">
+          <input type="hidden" name="_captcha" value="false">
+          <div class="hp" aria-hidden="true">
+            <label for="contact-honey">Leave this field empty</label>
+            <input id="contact-honey" name="_honey" type="text" tabindex="-1" autocomplete="off">
+          </div>
+
           <div class="contact-row">
             <div class="field-wrap">
               <label class="field" for="contact-name">
-                <input id="contact-name" name="name" type="text" autocomplete="name" placeholder=" " maxlength="80" spellcheck="false" aria-describedby="contact-name-error" required>
+                <input id="contact-name" name="name" type="text" autocomplete="name" autocapitalize="words" placeholder=" " minlength="2" maxlength="60" spellcheck="false" aria-describedby="contact-name-error" required>
                 <span data-en="Full name" data-he="שם מלא">Full name</span>
               </label>
-              <p class="field-error" id="contact-name-error" role="alert" hidden></p>
+              <p class="field-error" id="contact-name-error" hidden></p>
             </div>
             <div class="field-wrap">
               <label class="field" for="contact-email">
-                <input id="contact-email" name="email" type="email" autocomplete="email" inputmode="email" placeholder=" " maxlength="254" spellcheck="false" aria-describedby="contact-email-error" required>
+                <input id="contact-email" name="email" type="email" dir="ltr" autocomplete="email" inputmode="email" autocapitalize="off" placeholder=" " maxlength="254" spellcheck="false" pattern="[A-Za-z0-9._%+\-]+@[A-Za-z0-9\-]+(\.[A-Za-z0-9\-]+)*\.[A-Za-z]{2,}" aria-describedby="contact-email-error" required>
                 <span data-en="Email" data-he="אימייל">Email</span>
               </label>
-              <p class="field-error" id="contact-email-error" role="alert" hidden></p>
+              <p class="field-error" id="contact-email-error" hidden></p>
             </div>
           </div>
           <div class="field-wrap">
             <label class="field" for="contact-phone">
-              <input id="contact-phone" name="phone" type="tel" autocomplete="tel" inputmode="tel" placeholder=" " maxlength="16" spellcheck="false" aria-describedby="contact-phone-error" required>
+              <input id="contact-phone" name="phone" type="tel" dir="ltr" autocomplete="tel" inputmode="tel" placeholder=" " maxlength="13" spellcheck="false" pattern="(0[0-9]{8,9}|\+[1-9][0-9]{7,11})" aria-describedby="contact-phone-error" required>
               <span data-en="Phone" data-he="טלפון">Phone</span>
             </label>
-            <p class="field-error" id="contact-phone-error" role="alert" hidden></p>
+            <p class="field-error" id="contact-phone-error" hidden></p>
           </div>
           <div class="field-wrap">
             <label class="field" for="contact-message">
-              <textarea id="contact-message" name="message" rows="5" placeholder=" " maxlength="2000" aria-describedby="contact-message-error" required></textarea>
+              <textarea id="contact-message" name="message" rows="5" placeholder=" " minlength="10" maxlength="1000" aria-describedby="contact-message-error contact-message-count" required></textarea>
               <span data-en="Message" data-he="הודעה">Message</span>
             </label>
-            <p class="field-error" id="contact-message-error" role="alert" hidden></p>
+            <div class="field-meta">
+              <p class="field-error" id="contact-message-error" hidden></p>
+              <p class="field-count" id="contact-message-count" dir="ltr">0 / 1000</p>
+            </div>
           </div>
-          <button type="submit" class="button" data-en="Send message" data-he="שליחת הודעה">Send message</button>
+          <button type="submit" class="button" data-label-en="Send message" data-label-he="שליחת הודעה">Send message</button>
           <p class="contact-status" role="status" aria-live="polite" hidden></p>
         </form>
 
-        <p class="contact-note"><span data-en="You can also email" data-he="אפשר גם לשלוח מייל ל">You can also email</span> <a class="email" href="mailto:rnakdesk@gmail.com">rnakdesk@gmail.com</a>.</p>
+        <p class="contact-note"><span data-en="You can also email" data-he="אפשר גם לכתוב לנו אל">You can also email</span> <a class="email" href="mailto:rnakdesk@gmail.com" dir="ltr">rnakdesk@gmail.com</a>.</p>
       </section>
 
       <section class="faq">
@@ -119,6 +130,6 @@
       <p>© Rnak <span data-year>2026</span>. All rights reserved.</p>
     </footer>
   </div>
-  <script src="assets/js/site.js"></script>
+  <script src="assets/js/site.js?v=20260926.3"></script>
 </body>
 </html>

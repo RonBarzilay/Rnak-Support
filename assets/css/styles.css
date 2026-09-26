@@ -278,6 +278,59 @@ body[dir="rtl"] .field span {
   line-height: 1.35;
 }
 
+.field-meta {
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-end;
+  gap: 1rem;
+}
+
+.field-meta .field-error {
+  margin-inline-end: auto;
+}
+
+.field-count {
+  margin: 0 0.25rem;
+  color: var(--muted);
+  font-size: 0.8rem;
+  font-variant-numeric: tabular-nums;
+  line-height: 1.35;
+}
+
+.field-count.is-near-limit {
+  color: var(--coral);
+}
+
+.contact-form input[dir="ltr"] {
+  text-align: start;
+}
+
+body[dir="rtl"] .contact-form input[dir="ltr"] {
+  text-align: right;
+}
+
+.hp {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+.contact-form .button[aria-busy="true"] {
+  cursor: progress;
+  opacity: 0.7;
+}
+
+.contact-form .button:disabled {
+  pointer-events: none;
+}
+
+.contact-status.is-error {
+  color: var(--coral);
+}
+
 .contact-form input:-webkit-autofill,
 .contact-form textarea:-webkit-autofill {
   -webkit-text-fill-color: var(--text);
