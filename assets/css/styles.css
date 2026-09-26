@@ -350,10 +350,6 @@ body[dir="rtl"] .contact-form input[dir="ltr"] {
   font-weight: 600;
 }
 
-.contact-note {
-  margin: 1.15rem 0 0;
-}
-
 .contact a.button,
 .button {
   display: inline-flex;
@@ -368,13 +364,6 @@ body[dir="rtl"] .contact-form input[dir="ltr"] {
   font: inherit;
   font-weight: 700;
   cursor: pointer;
-}
-
-.email {
-  font-size: 1.15rem;
-  font-weight: 700;
-  color: var(--text);
-  text-decoration: none;
 }
 
 .faq-item {
