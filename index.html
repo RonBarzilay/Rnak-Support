@@ -48,25 +48,37 @@
         <h2 data-en="Contact Rnak" data-he="יצירת קשר">Contact Rnak</h2>
         <p data-en="Fill in the form and we will get back to you. All fields are required." data-he="מלאו את הטופס ונחזור אליכם. כל השדות חובה.">Fill in the form and we will get back to you. All fields are required.</p>
 
-        <form class="contact-form" action="mailto:rnakdesk@gmail.com" method="post" enctype="text/plain">
+        <form class="contact-form" autocomplete="on" novalidate>
           <div class="contact-row">
-            <label class="field" for="contact-name">
-              <input id="contact-name" name="name" type="text" autocomplete="name" placeholder=" " required>
-              <span data-en="Full name" data-he="שם מלא">Full name</span>
-            </label>
-            <label class="field" for="contact-email">
-              <input id="contact-email" name="email" type="email" autocomplete="email" inputmode="email" placeholder=" " required>
-              <span data-en="Email" data-he="אימייל">Email</span>
-            </label>
+            <div class="field-wrap">
+              <label class="field" for="contact-name">
+                <input id="contact-name" name="name" type="text" autocomplete="name" placeholder=" " maxlength="80" spellcheck="false" aria-describedby="contact-name-error" required>
+                <span data-en="Full name" data-he="שם מלא">Full name</span>
+              </label>
+              <p class="field-error" id="contact-name-error" role="alert" hidden></p>
+            </div>
+            <div class="field-wrap">
+              <label class="field" for="contact-email">
+                <input id="contact-email" name="email" type="email" autocomplete="email" inputmode="email" placeholder=" " maxlength="254" spellcheck="false" aria-describedby="contact-email-error" required>
+                <span data-en="Email" data-he="אימייל">Email</span>
+              </label>
+              <p class="field-error" id="contact-email-error" role="alert" hidden></p>
+            </div>
           </div>
-          <label class="field" for="contact-phone">
-            <input id="contact-phone" name="phone" type="tel" autocomplete="tel" inputmode="tel" placeholder=" " required>
-            <span data-en="Phone" data-he="טלפון">Phone</span>
-          </label>
-          <label class="field" for="contact-message">
-            <textarea id="contact-message" name="message" rows="5" placeholder=" " required></textarea>
-            <span data-en="Message" data-he="הודעה">Message</span>
-          </label>
+          <div class="field-wrap">
+            <label class="field" for="contact-phone">
+              <input id="contact-phone" name="phone" type="tel" autocomplete="tel" inputmode="tel" placeholder=" " maxlength="16" spellcheck="false" aria-describedby="contact-phone-error" required>
+              <span data-en="Phone" data-he="טלפון">Phone</span>
+            </label>
+            <p class="field-error" id="contact-phone-error" role="alert" hidden></p>
+          </div>
+          <div class="field-wrap">
+            <label class="field" for="contact-message">
+              <textarea id="contact-message" name="message" rows="5" placeholder=" " maxlength="2000" aria-describedby="contact-message-error" required></textarea>
+              <span data-en="Message" data-he="הודעה">Message</span>
+            </label>
+            <p class="field-error" id="contact-message-error" role="alert" hidden></p>
+          </div>
           <button type="submit" class="button" data-en="Send message" data-he="שליחת הודעה">Send message</button>
           <p class="contact-status" role="status" aria-live="polite" hidden></p>
         </form>

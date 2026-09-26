@@ -2,6 +2,28 @@
   var buttons = document.querySelectorAll(".lang button");
   var nodes = document.querySelectorAll("[data-en][data-he]");
   var panels = document.querySelectorAll(".i18n[data-show]");
+  var FIELD_ERRORS = {
+    en: {
+      nameRequired: "Enter your full name.",
+      nameInvalid: "Use letters only.",
+      emailRequired: "Enter your email.",
+      emailInvalid: "Enter a valid email address.",
+      phoneRequired: "Enter your phone number.",
+      phoneInvalid: "Use numbers only, at least 8 digits.",
+      messageRequired: "Enter a message.",
+      messageShort: "Write a bit more so we can help."
+    },
+    he: {
+      nameRequired: "נא למלא שם מלא.",
+      nameInvalid: "השם יכול לכלול אותיות בלבד.",
+      emailRequired: "נא למלא אימייל.",
+      emailInvalid: "נא להזין כתובת אימייל תקינה.",
+      phoneRequired: "נא למלא מספר טלפון.",
+      phoneInvalid: "הטלפון יכול לכלול ספרות בלבד, לפחות 8 ספרות.",
+      messageRequired: "נא לכתוב הודעה.",
+      messageShort: "נא לכתוב עוד קצת כדי שנוכל לעזור."
+    }
+  };
 
   function readLang() {
     try {
@@ -58,6 +80,7 @@
     } catch (e) {}
     persistUrl(lang);
     syncLinks(lang);
+    refreshFieldErrors();
     document.documentElement.setAttribute("data-i18n-ready", "1");
   }
 
@@ -88,26 +111,138 @@
     });
   });
 
+  function currentLang() {
+    return document.documentElement.lang === "he" ? "he" : "en";
+  }
+
+  function refreshFieldErrors() {
+    var copy = FIELD_ERRORS[currentLang()];
+    document.querySelectorAll(".field-error[data-error]").forEach(function (el) {
+      var key = el.getAttribute("data-error");
+      if (key && copy[key]) el.textContent = copy[key];
+    });
+  }
+
+  function setFieldError(input, key) {
+    var field = input.closest(".field");
+    var error = document.getElementById(input.id + "-error");
+    if (!field || !error) return;
+    if (!key) {
+      field.classList.remove("is-invalid");
+      input.removeAttribute("aria-invalid");
+      error.hidden = true;
+      error.textContent = "";
+      error.removeAttribute("data-error");
+      return;
+    }
+    field.classList.add("is-invalid");
+    input.setAttribute("aria-invalid", "true");
+    error.hidden = false;
+    error.setAttribute("data-error", key);
+    error.textContent = FIELD_ERRORS[currentLang()][key];
+  }
+
+  function letterCount(value) {
+    return (value.match(/\p{L}/gu) || []).length;
+  }
+
+  function digitCount(value) {
+    return (value.match(/\d/g) || []).length;
+  }
+
+  function sanitizeName(value) {
+    return value.replace(/[^\p{L}\p{M}\s'\u05F3\u2019-]/gu, "").replace(/\s+/g, " ");
+  }
+
+  function sanitizeEmail(value) {
+    return value.replace(/[^a-zA-Z0-9.!#$%&'*+/=?^_`{|}~@-]/g, "");
+  }
+
+  function sanitizePhone(value) {
+    var plus = value.charAt(0) === "+" ? "+" : "";
+    return plus + value.replace(/\D/g, "").slice(0, 15);
+  }
+
+  function validateName(value) {
+    if (!value.trim()) return "nameRequired";
+    if (letterCount(value) < 2) return "nameInvalid";
+    return "";
+  }
+
+  function validateEmail(value) {
+    if (!value.trim()) return "emailRequired";
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value)) return "emailInvalid";
+    return "";
+  }
+
+  function validatePhone(value) {
+    if (!value.trim()) return "phoneRequired";
+    if (digitCount(value) < 8) return "phoneInvalid";
+    return "";
+  }
+
+  function validateMessage(value) {
+    if (!value.trim()) return "messageRequired";
+    if (value.trim().length < 10) return "messageShort";
+    return "";
+  }
+
   var form = document.querySelector(".contact-form");
   if (form) {
-    form.addEventListener("submit", function (event) {
-      if (!form.checkValidity()) return;
-      event.preventDefault();
+    var sanitizers = {
+      name: sanitizeName,
+      email: sanitizeEmail,
+      phone: sanitizePhone
+    };
+    var validators = {
+      name: validateName,
+      email: validateEmail,
+      phone: validatePhone,
+      message: validateMessage
+    };
 
-      var name = form.elements.name.value.trim();
-      var email = form.elements.email.value.trim();
-      var phone = form.elements.phone.value.trim();
-      var message = form.elements.message.value.trim();
-      var lang = document.documentElement.lang === "he" ? "he" : "en";
+    ["name", "email", "phone", "message"].forEach(function (key) {
+      var input = form.elements[key];
+      if (!input) return;
+      input.addEventListener("input", function () {
+        if (sanitizers[key]) {
+          var next = sanitizers[key](input.value);
+          if (input.value !== next) input.value = next;
+        }
+        if (input.getAttribute("aria-invalid") === "true") {
+          setFieldError(input, validators[key](input.value));
+        }
+      });
+      input.addEventListener("blur", function () {
+        setFieldError(input, validators[key](input.value));
+      });
+    });
+
+    form.addEventListener("submit", function (event) {
+      event.preventDefault();
+      var firstInvalid = null;
+      var values = {};
+      ["name", "email", "phone", "message"].forEach(function (key) {
+        var input = form.elements[key];
+        var error = validators[key](input.value);
+        setFieldError(input, error);
+        if (error && !firstInvalid) firstInvalid = input;
+        values[key] = input.value.trim();
+      });
+      if (firstInvalid) {
+        firstInvalid.focus();
+        return;
+      }
+
+      var lang = currentLang();
       var subject = lang === "he" ? "פנייה לתמיכת Rnak" : "Rnak support request";
       var body = [
-        (lang === "he" ? "שם: " : "Name: ") + name,
-        (lang === "he" ? "אימייל: " : "Email: ") + email,
-        (lang === "he" ? "טלפון: " : "Phone: ") + phone,
+        (lang === "he" ? "שם: " : "Name: ") + values.name,
+        (lang === "he" ? "אימייל: " : "Email: ") + values.email,
+        (lang === "he" ? "טלפון: " : "Phone: ") + values.phone,
         "",
-        message
+        values.message
       ].join("\n");
-
       window.location.href = "mailto:rnakdesk@gmail.com?subject=" + encodeURIComponent(subject) + "&body=" + encodeURIComponent(body);
 
       var status = form.querySelector(".contact-status");
