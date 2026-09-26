@@ -433,7 +433,8 @@
         updateCounter();
         setStatus("sent");
       })
-      .catch(function () {
+      .catch(function (error) {
+        console.error("Contact form submission failed:", error);
         setStatus(navigator.onLine === false ? "offline" : "failed", true);
       })
       .finally(function () {
